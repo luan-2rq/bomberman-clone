@@ -15,8 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="bomberman_clone"
-run/main_scene="res://Root.tscn"
+config/name="bomberman"
+run/main_scene="res://fase.tscn"
 config/icon="res://icon.png"
 
 [rendering]
