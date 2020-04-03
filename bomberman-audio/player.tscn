@@ -22,5 +22,5 @@ shape = SubResource( 1 )
 
 [node name="stepFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -4.272
-pitch_scale = 1.77
+volume_db = -15.379
+pitch_scale = 1.38

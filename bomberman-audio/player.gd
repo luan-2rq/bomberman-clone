@@ -16,17 +16,14 @@ func _process(delta):
 	
 
 func _physics_process(delta):
-	var r = 0
-	var l = 0
-	var u = 0
-	var d = 0
-	
+	var x = 0
+	var y = 0
 	if Input.is_action_pressed("ui_right"):
-		r = 1
+		x = 1
 	if Input.is_action_pressed("ui_left"):
-		l = -1
+		x = -1
 	if Input.is_action_pressed("ui_up"):
-		u = -1
+		y = -1
 	if Input.is_action_pressed("ui_down"):
-		d = 1
-	set_position(get_position() + Vector2(vel*(r+l),vel*(u+d))*delta)
+		y = 1
+	set_position(get_position() + Vector2(vel*x,vel*y)*delta)
