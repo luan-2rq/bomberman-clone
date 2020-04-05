@@ -15,12 +15,7 @@ func _ready():
 func _process(delta):
 	if $pointer.is_colliding():
 			print("eu")
-	if Input.is_action_just_pressed("ui_right") || Input.is_action_just_pressed("ui_left") || Input.is_action_just_pressed("ui_up") || Input.is_action_just_pressed("ui_down"):
-		$stepFX.play()
-		
-	elif Input.is_action_just_released("ui_right") || Input.is_action_just_released("ui_left") || Input.is_action_just_released("ui_up") || Input.is_action_just_released("ui_down"):
-		$stepFX.stop()
-		
+			
 	if Input.is_action_pressed("ui_accept") && allowedBombPlacing:
 		if $pointer.is_colliding():
 			if $pointer.get_collider().is_in_group("bomb"):
@@ -39,15 +34,19 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += speed
 		facing = Vector2(55, 0)
+		$Sprite/AnimationPlayer.play("move_right")
 	if Input.is_action_pressed("ui_left"):
 		velocity.x -= speed
 		facing = Vector2(-55, 0)
+		$Sprite/AnimationPlayer.play("move_left")
 	if Input.is_action_pressed("ui_up"):
 		velocity.y -= speed
 		facing = Vector2(0, 55)
+		$Sprite/AnimationPlayer.play("move_up")
 	if Input.is_action_pressed("ui_down"):
 		velocity.y += speed
 		facing = Vector2(0, -55)
+		$Sprite/AnimationPlayer.play("move_down")
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	#implementing the direction the raycast will aim
 	$pointer.cast_to = facing
