@@ -1,27 +1,28 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://bomberman audio/step.wav" type="AudioStream" id=2]
+[ext_resource path="res://bomberman audio/step.wav" type="AudioStream" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://player.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 31 )
+extents = Vector2( 31.4987, 32 )
 
-[node name="player" type="KinematicBody2D"]
-position = Vector2( 406, 237 )
-scale = Vector2( 0.48, 0.48 )
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
+position = Vector2( 72, 80 )
+scale = Vector2( 0.64, 0.64 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="stepFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
-volume_db = -15.379
-pitch_scale = 1.38
+stream = ExtResource( 1 )
+volume_db = 16.0
