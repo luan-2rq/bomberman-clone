@@ -55,4 +55,6 @@ func _ready():
 		if (n + 1) % board_length == 0:
 			background_tile_position.y = background_tile_position.y + tile_size
 			background_tile_position.x = backgroud_initial_position_x
+			
+	#instancing board unbrakable tiles
 				
