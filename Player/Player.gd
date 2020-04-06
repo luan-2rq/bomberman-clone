@@ -5,7 +5,7 @@ var current_player
 export var speed = 64
 export var initial_bombs_capacity = 5
 
-var pre_load_bomb = load("res://Bomb/Bomb.tscn")
+export (PackedScene) var pre_load_bomb
 #export var bombs_size = 5
 
 #controles para o player 0
