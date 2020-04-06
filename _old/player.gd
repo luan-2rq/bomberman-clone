@@ -1,7 +1,7 @@
 extends KinematicBody2D
 var speed = 200
 var velocity = Vector2(0, 0)
-var bomb = preload("res://bomb.tscn")
+var bomb = preload("res://_old/bomb.tscn")
 var allowedBombPlacing = true
 #the raycast must receive this variable to know where to point
 var facing = Vector2(0, 0)
@@ -25,8 +25,6 @@ func _process(delta):
 				bomb_node.position = $pointer.get_collider().position
 				get_parent().add_child(bomb_node)
 				allowedBombPlacing = false
-			
-	
 
 func _physics_process(delta):
 	velocity.x = 0
