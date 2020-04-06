@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/step.wav-cf1048a83a298431254e435680a3c98f.sample"
+path="res://.import/step.wav-612309e0c18b92444192865fdf79baa8.sample"
 
 [deps]
 
-source_file="res://bomberman audio/step.wav"
-dest_files=[ "res://.import/step.wav-cf1048a83a298431254e435680a3c98f.sample" ]
+source_file="res://_old/bomberman audio/step.wav"
+dest_files=[ "res://.import/step.wav-612309e0c18b92444192865fdf79baa8.sample" ]
 
 [params]
 

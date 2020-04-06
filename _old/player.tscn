@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://_old/bomberman audio/step.wav" type="AudioStream" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://_old/player.gd" type="Script" id=3]
+
+
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31.4987, 32 )
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 4
+light_mode = 1
+
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
+position = Vector2( 80.8674, 80.6425 )
+scale = Vector2( 0.64, 0.64 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="stepFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = 16.0
+
+[node name="pointer" type="RayCast2D" parent="."]
+material = SubResource( 2 )
+enabled = true
+cast_to = Vector2( 0, 55 )
+collide_with_areas = true

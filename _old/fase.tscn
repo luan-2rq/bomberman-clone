@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://unbreakable_block.tscn" type="PackedScene" id=2]
-[ext_resource path="res://background.png" type="Texture" id=3]
-[ext_resource path="res://StageController.gd" type="Script" id=4]
+[ext_resource path="res://_old/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://_old/unbreakable_block.tscn" type="PackedScene" id=2]
+[ext_resource path="res://_old/background.png" type="Texture" id=3]
+[ext_resource path="res://_old/StageController.gd" type="Script" id=4]
 
 [node name="Stage" type="Node2D"]
 

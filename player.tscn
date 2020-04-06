@@ -1,8 +1,16 @@
 [gd_scene load_steps=10 format=2]
 
+<<<<<<< Updated upstream:player.tscn
 [ext_resource path="res://bomberman audio/step.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/Male 01-1.png" type="Texture" id=2]
 [ext_resource path="res://player.gd" type="Script" id=3]
+=======
+[ext_resource path="res://_old/bomberman audio/step.wav" type="AudioStream" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://_old/player.gd" type="Script" id=3]
+
+
+>>>>>>> Stashed changes:_old/player.tscn
 
 [sub_resource type="Animation" id=3]
 resource_name = "move_down"

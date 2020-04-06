@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/unbreakable_block.png-3378f3340e8f26d5e60f68b212a3c876.stex"
+path="res://.import/breakable_block.png-20c93b44f2204282ed23e9e4cd6901f4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://unbreakable_block.png"
-dest_files=[ "res://.import/unbreakable_block.png-3378f3340e8f26d5e60f68b212a3c876.stex" ]
+source_file="res://_old/breakable_block.png"
+dest_files=[ "res://.import/breakable_block.png-20c93b44f2204282ed23e9e4cd6901f4.stex" ]
 
 [params]
 
