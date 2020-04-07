@@ -4,6 +4,7 @@ extends KinematicBody2D
 
 var collides = 0 #determina se o objeto colide com outros ou não.
 var weight = 0 #poder necessario para levantar e jogar o objeto.
+var health = 3 #todo objeto tem um valor de vida. quando este chega a zero, a função que destroi o objeto é chamada. (se for bomba explode, etc.)
 
 func _enter_tree():
 	pass
