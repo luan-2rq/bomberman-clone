@@ -1,7 +1,7 @@
 extends Area2D
 
 var player_owner #O jogador que posicionou a bomba.
-var bomb_range = 3 #alcance da explosão da bomba
+var bomb_range = 1 #alcance da explosão da bomba
 #TODO receber o valor de bomb_range do player
 
 var tilemap
