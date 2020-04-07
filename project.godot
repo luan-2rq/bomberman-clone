@@ -16,8 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="bomberman"
-run/main_scene="res://Stage_01/Stage_01.tscn"
-config/icon="res://icon.png"
+config/icon="res://project_icon.png"
 
 [display]
 
@@ -82,4 +81,3 @@ drop_bomb_alt={
 [rendering]
 
 quality/2d/use_pixel_snap=true
-environment/default_environment="res://_old/default_env.tres"

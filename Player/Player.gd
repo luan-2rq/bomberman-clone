@@ -5,6 +5,8 @@ var current_player
 export var speed = 64
 export var initial_bombs_capacity = 5
 
+export (Resource) var current_player_sprite
+
 export (PackedScene) var pre_load_bomb
 #export var bombs_size = 5
 
@@ -31,6 +33,7 @@ var player_1 = {
 func _ready():
 	get_and_spawn_current_player() #Atribui os inputs para o jogador de acordo com o player_id e os posiciona no ponto de spawn
 	position = get_parent().get_node(current_player.spawn_point).position
+	$AnimatedSprite.frames = current_player_sprite
 
 func _physics_process(delta): #Executada a cada frame para identificar o movimento do jogador.
 	var velocity = Vector2() 
@@ -49,6 +52,19 @@ func _physics_process(delta): #Executada a cada frame para identificar o movimen
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
+		$AnimatedSprite.play()
+	else:
+		$AnimatedSprite.animation = "down"
+		$AnimatedSprite.stop()
+	
+	if velocity.y > 0:
+		$AnimatedSprite.animation = "down"
+	elif velocity.y < 0:
+		$AnimatedSprite.animation = "up"
+	elif velocity.x > 0:
+		$AnimatedSprite.animation = "right"
+	elif velocity.x < 0:
+		$AnimatedSprite.animation = "left"
 	
 	move_and_slide(velocity)
 
@@ -66,9 +82,22 @@ func _input(event):
 
 func spawn_bomb():
 	var bomb = pre_load_bomb.instance()
-	var bomb_position = position
-	#TODO Alinhar o bomb_position ao TileMap
+	var bomb_position = get_tilemap().world_to_map(position) * get_tilemap().get_cell_size()
+	
 	bomb.set_position(bomb_position)
 	get_parent().add_child(bomb)
+	
 	bomb.player_owner = get_parent().get_node(name)
+	bomb.tilemap = get_tilemap()
+	bomb.blocks = get_blocks()
 	bomb.z_index = 1
+
+func get_tilemap():
+	for node in get_parent().get_children():
+		if node is TileMap:
+			return(node)
+
+func get_blocks():
+	for node in get_tilemap().get_children():
+		if node is TileMap:
+			return(node)

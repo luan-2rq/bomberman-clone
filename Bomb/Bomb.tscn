@@ -30,12 +30,13 @@ radius = 7.17986
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 8, 8 )
 frames = SubResource( 4 )
 frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 0.434017 )
+position = Vector2( 8, 8.43402 )
 shape = SubResource( 5 )
 
 [node name="Timer" type="Timer" parent="."]
