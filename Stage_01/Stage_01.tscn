@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Bomb/Bomb.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/Body/basic_body.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+
+func _ready():
+	pass # Replace with function body.
+
+
+"
+
+[node name="Stage_01" type="Node"]
+script = SubResource( 1 )
+
+[node name="Player0" parent="." instance=ExtResource( 1 )]
+position = Vector2( 68.0006, 57.22 )
+pre_load_bomb = ExtResource( 2 )
+
+[node name="Basic_Body" type="KinematicBody2D" parent="Player0"]
+script = ExtResource( 3 )
+
+[node name="Player1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 318.442, 332.54 )
+player_id = 1
+pre_load_bomb = ExtResource( 2 )
+
+[node name="Basic_Body" type="KinematicBody2D" parent="Player1"]
+script = ExtResource( 3 )
+
+[node name="SpawnPlayer0" type="Position2D" parent="."]
+position = Vector2( 343.05, 46.0102 )
+
+[node name="SpawnPlayer1" type="Position2D" parent="."]
+position = Vector2( 70.7338, 337.592 )
