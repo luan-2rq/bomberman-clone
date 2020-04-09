@@ -7,7 +7,9 @@
 radius = 7.36528
 height = 0.334484
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
 z_index = 2
 script = ExtResource( 2 )
 
@@ -15,7 +17,6 @@ script = ExtResource( 2 )
 position = Vector2( -0.5, -8 )
 frames = ExtResource( 1 )
 animation = "down"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
