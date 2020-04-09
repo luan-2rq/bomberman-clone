@@ -1,30 +1,46 @@
 extends Area2D
 
 var player_owner #O jogador que posicionou a bomba.
-var bomb_range = 4 #alcance da explosão da bomba
+var player_is_alive = true
+var bomb_range = 8 #alcance da explosão da bomba
 #TODO receber o valor de bomb_range do player
+
 var tilemap
 var blocks
 
-var player_is_in_bomb_area
-var players_in_bomb_area = []
-
 func _ready():
-	set_bomb_range(bomb_range)
+	pass
 
-func set_bomb_range(bomb_range):
-	var bomb_collision_x_axis = $bomb_range_area.get_child(0)
-	var bomb_collision_y_axis = $bomb_range_area.get_child(1)
-	bomb_collision_x_axis.scale = Vector2(1 + 2 * bomb_range, 1)
-	bomb_collision_y_axis.scale = Vector2(1, 1 + 2 * bomb_range)
-
-#Essa função mata os playes que estão na área de alcance da bomba
-func kill_players(var players_to_kill):
-	if player_is_in_bomb_area:
-		for x in range(players_to_kill.size()):
-			players_to_kill[x].queue_free()
-
-func explosion():
+func _on_Timer_timeout():
+	explosion()
+	#if player_is_alive:
+		#player_owner.current_player["bombs_capacity"] += 1 
+	queue_free()
+	
+func explosion_to_players():
+	var raycasts = {
+	"up_raycast" : $UpRaycast,
+	"bottom_raycast" : $BottomRaycast,
+	"right_raycast" : $RightRaycast,
+	"left_raycast" : $LeftRaycast
+	}
+	
+	#Setando o range da bomba nos raycasts. 
+	raycasts.values()[0].scale.y = bomb_range
+	raycasts.values()[1].scale.y = bomb_range
+	raycasts.values()[2].scale.x = bomb_range
+	raycasts.values()[3].scale.x = bomb_range
+	
+	for i in range(raycasts.size()):	
+		if raycasts.values()[i].is_colliding():
+			print(raycasts.values()[i].get_collider(), i)
+			#Verificando se um player foi atingido pelo raycast
+			if raycasts.values()[i].get_collider().is_in_group("player"):
+				#Destruímos o personagem na linha abaixo
+				raycasts.values()[i].get_collider().queue_free()
+		i += 1
+		
+func explosion_to_blocks():
 	var position_in_tilemap = position / tilemap.get_cell_size()
 	
 	var can_explode = {
@@ -59,21 +75,7 @@ func explosion():
 				can_explode[actual_axis] = false
 				if is_block:
 					blocks.set_cell(tile_position.x, tile_position.y, -1)
-
-func _on_bomb_range_area_body_entered(body):
-	if body.is_in_group("player"):
-		player_is_in_bomb_area = true
-		players_in_bomb_area.append(body)
-
-func _on_bomb_range_area_body_exited(body):
-	if body.is_in_group("player"):
-		player_is_in_bomb_area = false
-		players_in_bomb_area.erase(body)
-
-func _on_Timer_timeout():
-	var players_to_kill = players_in_bomb_area
-	kill_players(players_to_kill)
-	explosion()
-	queue_free()
-	#Falta fazer com que o player perca bombas, com o código abaixo tá crashando
-	#player_owner.current_player["bombs_capacity"] += 1
+	
+func explosion():
+	explosion_to_players()
+	explosion_to_blocks()
