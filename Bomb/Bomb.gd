@@ -25,15 +25,8 @@ func explosion_to_players():
 	"left_raycast" : $LeftRaycast
 	}
 	
-	#Setando o range da bomba nos raycasts. 
-	raycasts.values()[0].scale.y = bomb_range
-	raycasts.values()[1].scale.y = bomb_range
-	raycasts.values()[2].scale.x = bomb_range
-	raycasts.values()[3].scale.x = bomb_range
-	
 	for i in range(raycasts.size()):	
-		if raycasts.values()[i].is_colliding():
-			print(raycasts.values()[i].get_collider(), i)
+		if raycasts.values()[i].is_colliding():			
 			#Verificando se um player foi atingido pelo raycast
 			if raycasts.values()[i].get_collider().is_in_group("player"):
 				#Destruímos o personagem na linha abaixo

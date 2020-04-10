@@ -8,7 +8,7 @@ export var initial_bombs_capacity = 5
 export (Resource) var current_player_sprite
 
 export (PackedScene) var pre_load_bomb
-#export var bombs_size = 5
+export var bombs_size = 5
 
 #controles para o player 0
 var player_0 = {
@@ -83,6 +83,12 @@ func _input(event):
 func spawn_bomb():
 	var bomb = pre_load_bomb.instance()
 	var bomb_position = get_tilemap().world_to_map(position) * get_tilemap().get_cell_size()
+	
+	#Setando o alcance de explosão bomba
+	bomb.get_child(3).scale.y = bombs_size
+	bomb.get_child(4).scale.y = bombs_size
+	bomb.get_child(5).scale.x = bombs_size
+	bomb.get_child(6).scale.x = bombs_size
 	
 	bomb.set_position(bomb_position)
 	get_parent().add_child(bomb)
