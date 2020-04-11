@@ -35,7 +35,7 @@ func _ready():
 	position = get_parent().get_node(current_player.spawn_point).position
 	$AnimatedSprite.frames = current_player_sprite
 
-func _physics_process(delta): #Executada a cada frame para identificar o movimento do jogador.
+func _physics_process(_delta): #Executada a cada frame para identificar o movimento do jogador.
 	var velocity = Vector2() 
 
 	if Input.is_action_pressed(current_player.walk_down):
@@ -66,7 +66,7 @@ func _physics_process(delta): #Executada a cada frame para identificar o movimen
 	elif velocity.x < 0:
 		$AnimatedSprite.animation = "left"
 	
-	move_and_slide(velocity)
+	velocity = move_and_slide(velocity)
 
 func get_and_spawn_current_player():
 	if player_id == 0:
@@ -75,7 +75,7 @@ func get_and_spawn_current_player():
 		current_player = player_1
 	current_player["bombs_capacity"] = initial_bombs_capacity
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_pressed(current_player.drop_bomb) and current_player.bombs_capacity > 0:
 		spawn_bomb()
 		current_player.bombs_capacity -= 1

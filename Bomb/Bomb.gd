@@ -1,8 +1,8 @@
 extends Area2D
 
 var player_owner #O jogador que posicionou a bomba.
-var player_is_alive = true
 var bomb_range #alcance da explosão da bomba
+export(PackedScene) var collision_box
 #TODO receber o valor de bomb_range do player
 
 var tilemap
@@ -12,9 +12,8 @@ func _ready():
 	pass
 
 func _on_Timer_timeout():
-	explosion()
-	#if player_is_alive:
-		#player_owner.current_player["bombs_capacity"] += 1 
+	player_owner.current_player["bombs_capacity"] += 1 
+	explosion()	
 	queue_free()
 	
 #Essa função é usada para destruir o player que está fora do tilemap caso ele esteja na área da bomba
@@ -81,3 +80,10 @@ func explosion_to_blocks():
 func explosion():
 	explosion_to_players()
 	explosion_to_blocks()
+
+func _on_Bomb_body_exited(_body):
+	call_deferred("add_collider")
+	
+func add_collider():
+	self.add_child(collision_box.instance())
+	
