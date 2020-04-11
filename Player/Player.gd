@@ -8,7 +8,7 @@ export var initial_bombs_capacity = 5
 export (Resource) var current_player_sprite
 
 export (PackedScene) var pre_load_bomb
-export var bombs_size = 5
+export var bombs_range = 5
 
 #controles para o player 0
 var player_0 = {
@@ -79,16 +79,39 @@ func _input(event):
 	if Input.is_action_pressed(current_player.drop_bomb) and current_player.bombs_capacity > 0:
 		spawn_bomb()
 		current_player.bombs_capacity -= 1
-
+		
+func set_bomb_range(bomb, _range):
+	#Setando o alcance de explosão bomba para os players
+	var UpRaycasts = [bomb.get_child(3).get_child(0),
+					bomb.get_child(3).get_child(1),
+					bomb.get_child(3).get_child(2)]
+	var BottomRaycasts = [bomb.get_child(4).get_child(0),
+					bomb.get_child(4).get_child(1),
+					bomb.get_child(4).get_child(2)]
+	var RightRaycasts = [bomb.get_child(5).get_child(0),
+					bomb.get_child(5).get_child(1),
+					bomb.get_child(5).get_child(2)]
+	var LeftRaycasts = [bomb.get_child(6).get_child(0),
+					bomb.get_child(6).get_child(1),
+					bomb.get_child(6).get_child(2)]
+	
+	for raycast in UpRaycasts:
+		raycast.cast_to = Vector2(0, -(16 * _range + 8))
+	for raycast in BottomRaycasts:
+		raycast.cast_to = Vector2(0, 16 * _range + 8)
+	for raycast in RightRaycasts:
+		raycast.cast_to = Vector2(16 * _range + 8, 0)
+	for raycast in LeftRaycasts:
+		raycast.cast_to = Vector2(-(16 * _range + 8), 0)
+	
+	#Setando o alcance da bomba para os blocos
+	bomb.bomb_range = _range
+	
 func spawn_bomb():
 	var bomb = pre_load_bomb.instance()
 	var bomb_position = get_tilemap().world_to_map(position) * get_tilemap().get_cell_size()
 	
-	#Setando o alcance de explosão bomba
-	bomb.get_child(3).scale.y = bombs_size
-	bomb.get_child(4).scale.y = bombs_size
-	bomb.get_child(5).scale.x = bombs_size
-	bomb.get_child(6).scale.x = bombs_size
+	set_bomb_range(bomb, bombs_range)
 	
 	bomb.set_position(bomb_position)
 	get_parent().add_child(bomb)

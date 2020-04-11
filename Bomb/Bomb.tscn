@@ -32,34 +32,82 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 8, 8 )
 frames = SubResource( 4 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 8, 8.43402 )
+position = Vector2( 8, 8 )
 shape = SubResource( 5 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
 
-[node name="UpRaycast" type="RayCast2D" parent="."]
+[node name="RaycastsUp" type="Node2D" parent="."]
+
+[node name="UpRaycast1" type="RayCast2D" parent="RaycastsUp"]
 position = Vector2( 8, 8 )
 enabled = true
 cast_to = Vector2( 0, -24 )
 
-[node name="BottomRaycast" type="RayCast2D" parent="."]
+[node name="UpRaycast2" type="RayCast2D" parent="RaycastsUp"]
+position = Vector2( 2, 8 )
+enabled = true
+cast_to = Vector2( 0, -24 )
+
+[node name="UpRaycast3" type="RayCast2D" parent="RaycastsUp"]
+position = Vector2( 14, 8 )
+enabled = true
+cast_to = Vector2( 0, -24 )
+
+[node name="RaycastsBottom" type="Node2D" parent="."]
+
+[node name="BottomRaycast1" type="RayCast2D" parent="RaycastsBottom"]
 position = Vector2( 8, 8 )
 enabled = true
 cast_to = Vector2( 0, 24 )
 
-[node name="RightRaycast" type="RayCast2D" parent="."]
+[node name="BottomRaycast3" type="RayCast2D" parent="RaycastsBottom"]
+position = Vector2( 14, 8 )
+enabled = true
+cast_to = Vector2( 0, 24 )
+
+[node name="BottomRaycast2" type="RayCast2D" parent="RaycastsBottom"]
+position = Vector2( 2, 8 )
+enabled = true
+cast_to = Vector2( 0, 24 )
+
+[node name="RaycastsRight" type="Node2D" parent="."]
+
+[node name="RightRaycast1" type="RayCast2D" parent="RaycastsRight"]
 position = Vector2( 8, 8 )
 enabled = true
 cast_to = Vector2( 24, 0 )
 
-[node name="LeftRaycast" type="RayCast2D" parent="."]
+[node name="RightRaycast2" type="RayCast2D" parent="RaycastsRight"]
+position = Vector2( 8, 2 )
+enabled = true
+cast_to = Vector2( 24, 0 )
+
+[node name="RightRaycast3" type="RayCast2D" parent="RaycastsRight"]
+position = Vector2( 8, 14 )
+enabled = true
+cast_to = Vector2( 24, 0 )
+
+[node name="RaycastsLeft" type="Node2D" parent="."]
+
+[node name="LeftRaycast1" type="RayCast2D" parent="RaycastsLeft"]
 position = Vector2( 8, 8 )
+enabled = true
+cast_to = Vector2( -24, 0 )
+
+[node name="LeftRaycast2" type="RayCast2D" parent="RaycastsLeft"]
+position = Vector2( 8, 2 )
+enabled = true
+cast_to = Vector2( -24, 0 )
+
+[node name="LeftRaycast3" type="RayCast2D" parent="RaycastsLeft"]
+position = Vector2( 8, 14 )
 enabled = true
 cast_to = Vector2( -24, 0 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

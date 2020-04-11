@@ -2,7 +2,7 @@ extends Area2D
 
 var player_owner #O jogador que posicionou a bomba.
 var player_is_alive = true
-var bomb_range = 8 #alcance da explosão da bomba
+var bomb_range #alcance da explosão da bomba
 #TODO receber o valor de bomb_range do player
 
 var tilemap
@@ -17,12 +17,21 @@ func _on_Timer_timeout():
 		#player_owner.current_player["bombs_capacity"] += 1 
 	queue_free()
 	
+#Essa função é usada para destruir o player que está fora do tilemap caso ele esteja na área da bomba
 func explosion_to_players():
 	var raycasts = {
-	"up_raycast" : $UpRaycast,
-	"bottom_raycast" : $BottomRaycast,
-	"right_raycast" : $RightRaycast,
-	"left_raycast" : $LeftRaycast
+	"up_raycast1" : $RaycastsUp.get_child(0),
+	"up_raycast2" : $RaycastsUp.get_child(1),
+	"up_raycast3" : $RaycastsUp.get_child(2),
+	"bottom_raycast1" : $RaycastsBottom.get_child(0),
+	"bottom_raycast2" : $RaycastsBottom.get_child(1),
+	"bottom_raycast3" : $RaycastsBottom.get_child(2),
+	"right_raycast1" : $RaycastsRight.get_child(0),
+	"right_raycast2" : $RaycastsRight.get_child(1),
+	"right_raycast3" : $RaycastsRight.get_child(2),
+	"left_raycast1" : $RaycastsLeft.get_child(0),
+	"left_raycast2" : $RaycastsLeft.get_child(1),
+	"left_raycast3" : $RaycastsLeft.get_child(2)
 	}
 	
 	for i in range(raycasts.size()):	
@@ -32,7 +41,7 @@ func explosion_to_players():
 				#Destruímos o personagem na linha abaixo
 				raycasts.values()[i].get_collider().queue_free()
 		i += 1
-		
+#Essa função é usada para destruir blocos que estão dentro do tilemap caso eles estejam na área da bomba
 func explosion_to_blocks():
 	var position_in_tilemap = position / tilemap.get_cell_size()
 	
