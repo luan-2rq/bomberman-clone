@@ -37,3 +37,5 @@ position = Vector2( 48, 32 )
 
 [node name="SpawnPlayer1" type="Position2D" parent="."]
 position = Vector2( 256, 176 )
+
+[node name="PowerUps" type="Node2D" parent="."]

@@ -1,8 +1,13 @@
 extends Area2D
 
+var rand_generate = RandomNumberGenerator.new()
 var player_owner #O jogador que posicionou a bomba.
 var bomb_range #alcance da explosão da bomba
 export(PackedScene) var collision_box
+export(PackedScene) var power_up_1
+export(PackedScene) var power_up_2
+export(PackedScene) var power_up_3
+var exploded = false
 #TODO receber o valor de bomb_range do player
 
 var tilemap
@@ -12,8 +17,8 @@ func _ready():
 	pass
 
 func _on_Timer_timeout():
-	player_owner.current_player["bombs_capacity"] += 1 
-	explosion()	
+	call_deferred("set_player_bomb_capacity") 
+	explosion()
 	queue_free()
 	
 #Essa função é usada para destruir o player que está fora do tilemap caso ele esteja na área da bomba
@@ -60,9 +65,15 @@ func explosion_to_blocks():
 			"right": Vector2(position_in_tilemap.x + i, position_in_tilemap.y),
 			"left": Vector2(position_in_tilemap.x - i, position_in_tilemap.y)
 		}
+		var power_ups = [power_up_1,
+			power_up_2,
+			power_up_3]
+			
 		
 		for j in range(bomb_axis.size()):
-
+			var power_up_appearence_probability = rand_generate.randi_range(1,3)
+			var random = rand_generate.randi_range(1,3)
+			
 			var actual_axis = bomb_axis.keys()[j]
 			var tile_position = bomb_axis.values()[j]
 			
@@ -75,7 +86,13 @@ func explosion_to_blocks():
 			if (is_wall or is_block) and can_explode[actual_axis]:
 				can_explode[actual_axis] = false
 				if is_block:
+					var position = Vector2(tile_position.x * blocks.get_cell_size().x + 8 , tile_position.y * blocks.get_cell_size().y + 8)
 					blocks.set_cell(tile_position.x, tile_position.y, -1)
+					if(power_up_appearence_probability == 1):
+						var power_up = power_ups[random - 1].instance()
+						power_up.set_position(position)
+						get_parent().get_child(5).add_child(power_up)
+					
 	
 func explosion():
 	explosion_to_players()
@@ -87,3 +104,10 @@ func _on_Bomb_body_exited(_body):
 func add_collider():
 	self.add_child(collision_box.instance())
 	
+func _process(_delta):
+	if exploded:
+		explosion()
+		queue_free()
+		
+func set_player_bomb_capacity():
+	player_owner.current_player["bombs_capacity"] += 1
